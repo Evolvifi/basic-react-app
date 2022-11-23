@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
 
 import "./App.css";
 
@@ -58,6 +59,28 @@ PokemonInfo.propTypes = {
   }),
 };
 
+const Title = styled.h1`
+  text-align: center;
+`;
+
+const TwoColumnLayout = styled.div`
+  display: grid;
+  grid-template-columns: 70% 30%;
+  grid-column-gap: 1rem;
+`;
+
+const Container = styled.div`
+  margin: auto;
+  width: 800px;
+  padding-top: 1rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  font-size: x-large;
+  padding: 0.2 rem;
+`;
+
 function App() {
   // Create State for input
   const [filter, filterSet] = useState("");
@@ -72,26 +95,14 @@ function App() {
   }, []);
 
   return (
-    <div
-      style={{
-        margin: "auto",
-        width: 800,
-        paddingTop: "1rem",
-      }}
-    >
-      <h1 className="title">Pokemon Search</h1>
+    <Container>
+      <Title>Pokemon Search</Title>
 
       {/* Adding the input tag so the user can search data remember to add format styles for tag in css file.  */}
-      <input value={filter} onChange={(e) => filterSet(e.target.value)} />
+      <Input value={filter} onChange={(e) => filterSet(e.target.value)} />
 
       {/* Use this div to wrap the table and add inline style here */}
-      <div
-        style={{
-          display: "grid",
-          grifTemplateColumns: "70% 30%",
-          gridColumnGap: "1rem",
-        }}
-      >
+      <TwoColumnLayout>
         <div>
           <table width="100%">
             <thead>
@@ -123,8 +134,8 @@ function App() {
         </div>
         {/* this div is to show when there is an selectedItem you have to place it in an conditional and use a curly brace */}
         {selectedItem && <PokemonInfo {...selectedItem} />}
-      </div>
-    </div>
+      </TwoColumnLayout>
+    </Container>
   );
 }
 
